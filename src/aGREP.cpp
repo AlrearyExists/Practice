@@ -9,6 +9,7 @@ using namespace boost;
 namespace po=boost::program_options;
 #include "findinfile.h"
 #include "folderWalk.h"
+#include "help.h"
 int main(int argc, char const *argv[])
 {
 	if (argc==1)
@@ -35,7 +36,7 @@ int main(int argc, char const *argv[])
 
 	if (vm.count("help"))
 		{
-			std::cout<<"help information"<<std::endl;
+			help();
 			return 0;
 		};
 	if (vm.count("version"))
