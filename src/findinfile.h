@@ -1,1 +1,1 @@
-bool findinfile(std::string filename,po::variables_map vm);
+int findinfile(std::string filename,po::variables_map vm);

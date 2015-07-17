@@ -7,10 +7,11 @@
 #include <boost/regex.hpp>
 using namespace boost;
 namespace po=boost::program_options;
-bool findinfile(std::string filename,po::variables_map vm){
+int findinfile(std::string filename,po::variables_map vm){
 	std::string line;
 	std::ifstream openedfile(filename);
 	std::string match_key=vm["pattern"].as<std::string>();
+	size_t linenumber=1;
 	if (vm.count("ignorecase"))
 	{
 		std::transform(match_key.begin(),match_key.end(),match_key.begin(),::tolower);
@@ -21,10 +22,10 @@ bool findinfile(std::string filename,po::variables_map vm){
 			if (boost::regex_search(filename,match_keyword))
 			{
 				openedfile.close();
-				return true;
+				return -1;
 			}
 			openedfile.close();
-			return false;
+			return 0;
 		}
 		else
 		{
@@ -35,9 +36,9 @@ bool findinfile(std::string filename,po::variables_map vm){
 			if (boost::regex_search(line,match_keyword))
 			{
 				openedfile.close();
-				return true;
+				return linenumber;
 			}
-
+			linenumber++;
 		}
 		}
 	}
@@ -49,10 +50,10 @@ bool findinfile(std::string filename,po::variables_map vm){
 			if (boost::regex_search(filename,match_keyword))
 			{
 				openedfile.close();
-				return true;
+				return -1;
 			}
 			openedfile.close();
-			return false;
+			return 0;
 		}
 		else{
 		while(openedfile)
@@ -62,12 +63,12 @@ bool findinfile(std::string filename,po::variables_map vm){
 			if (boost::regex_search(line,match_keyword))
 			{
 				openedfile.close();
-				return true;
+				return linenumber;
 			}
-
+			linenumber++;
 		}
 		}
 	}
 	openedfile.close();
-	return false;
+	return 0;
 }
