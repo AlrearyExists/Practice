@@ -17,18 +17,24 @@ int folderWalk (std::string path, po::variables_map vm)	//1 arg - a folder where
 	d = opendir(cPath);
 	if (d)
 	{
-		std::cout << path<<std::endl;
 		while ((dir = readdir(d)) != NULL)
 		{	
 			if (dir->d_type==DT_REG)
 			{	
 				std::string f_name=(const char*)dir->d_name;
 					
-				
-				if(findinfile(f_name,vm))
+				int g=findinfile(f_name,vm);
+				if(g<0)
 				{
-					std::cout<<f_name<<std::endl;
+					std::cout<<f_name<<std::endl;					
 				}
+				else 
+				{
+					if (g)
+						std::cout<<f_name<<std::endl<<"Line number: "<<g<<std::endl;
+
+				}
+
 			}
 			if ((vm.count("recursive"))&&(dir->d_type==DT_DIR)&&(strcmp(dir->d_name, UPDIR)!=0)&&(strcmp(dir->d_name, CURDIR)!=0))
 			{
