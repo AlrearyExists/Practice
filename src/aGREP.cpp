@@ -12,7 +12,8 @@ namespace po=boost::program_options;
 #include "folderWalk.h"
 #include "help.h"
 void hdl(int sig)
-{
+{	
+	fflush(stdout);
 	std::cout<<"Aborted by user"<<std::endl;
 	exit(130);
 }
