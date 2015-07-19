@@ -5,18 +5,38 @@
 #include <string>
 #include <fstream>
 #include <boost/regex.hpp>
+#include <signal.h>
 using namespace boost;
 namespace po=boost::program_options;
 #include "findinfile.h"
 #include "folderWalk.h"
 #include "help.h"
-int main(int argc, char const *argv[])
+void hdl(int sig)
 {
+	std::cout<<"Aborted by user"<<std::endl;
+	exit(130);
+}
+
+int main(int argc, char const *argv[])
+{	
 	if (argc==1)
 	{
 		std::cout<<"There is something like Grep"<<std::endl;
 		return 0;
 	};
+
+	struct sigaction act;
+	memset(&act,0,sizeof(act));
+	act.sa_handler=hdl;
+	sigset_t set;
+	sigemptyset(&set);
+	sigaddset(&set,SIGINT);
+	sigaddset(&set,SIGTSTP);
+	act.sa_mask=set;
+	sigaction(SIGINT,&act,0);
+	sigaction(SIGTSTP,&act,0);
+
+
 	po::options_description desc("General options");
 	desc.add_options()
 	("help,h", "Show help")
