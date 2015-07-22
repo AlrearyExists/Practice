@@ -1,7 +1,7 @@
 ﻿#include <iostream>
 
 void help() {
-    std::cout << "\nPATTERN FOR COMMAND \n\taGREP [Keys] -pPattern Directory\n\t\tExample: aGREP -n -p13pi /home/13pi/Dir\n\t\tResult: /home/13pi/13pi.cpp" << std::endl;
+    std::cout << "\nPATTERN FOR COMMAND: \n\taGREP [Keys] -pPattern Directory\n\t\tExample: aGREP -n -p13pi /home/13pi/Dir\n\t\tResult: /home/13pi/13pi.cpp" << std::endl;
     std::cout << "OPTIONS\n" << std::endl;
 	std::cout << "\t-h, --help Output a brief help message.\n" << std::endl;
 	std::cout << "\t\tExample: aGREP --help\n" << std::endl;
