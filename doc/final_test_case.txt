@@ -1,0 +1,406 @@
+Test case for final test aGREP system.
+
+////////////////////////Style example///////////////////////////////////
+Action: 								
+Expected_result:						
+Result as root: 						
+Result as user: 						
+Result from english dir:				
+Result from russian dir: 				
+Result from specsymbols dir:			
+Comments:								
+
+////////////////////////////////////////////////////////////////////////
+
+/////////////////////////Result example/////////////////////////////////
+Passed
+Blocked
+Failed
+////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////Pre-tests actions/////////////////////////////////
+mkdir ~/Test
+touch ~/Test/file
+touch ~/Test/FILe
+Add 'Example 1' to ~/Test/file
+Add 'ExamPLe 2' to ~/Test/FILe
+
+////////////////////////////////////////////////////////////////////////
+
+//////////////////////////////Tests/////////////////////////////////////
+Action: 								make
+Expected_result:						Compiled file 'aGREP'. 
+Result as root: 						Passed
+Result as user: 						Passed
+Result from english dir:				Passed
+Result from russian dir: 				Passed
+Result from specsymbols dir: 			Passed
+Comments:									
+
+Action: 								make install
+Expected_result:						aGREP can be run as a command.
+Result as root: 						Passed
+Result as user: 						Passed (need root's password)
+Result from english dir:				Passed
+Result from russian dir: 				Passed
+Result from specsymbols dir: 			Passed
+Comments:								User can't use this command without root's password. 
+
+Action: 								aGREP			
+Expected_result:						Show line information.
+Result as root: 						Passed
+Result as user: 						Passed
+Result from english dir:				Passed
+Result from russian dir: 				Passed
+Result from specsymbols dir: 			Passed
+Comments:								It may be necessary to add 'Use aGREP --help for help'
+
+Action: 								aGREP --help
+Expected_result:						Show help information. All keys must be present.
+Result as root: 						Passed
+Result as user: 						Passed
+Result from english dir:				Passed
+Result from russian dir: 				Passed
+Result from specsymbols dir: 			Passed
+Comments:								-
+
+Action: 								aGREP --version
+Expected_result:						Show current vesion of aGREP.
+Result as root: 						Passed
+Result as user: 						Passed
+Result from english dir:				Passed
+Result from russian dir: 				Passed
+Result from specsymbols dir: 			Passed
+Comments:								-
+
+Action: 								aGREP -h
+Expected_result:						Show help information. All keys must be present.
+Result as root: 						Passed
+Result as user: 						Passed
+Result from english dir:				Passed
+Result from russian dir: 				Passed
+Result from specsymbols dir: 			Passed
+Comments:								-
+
+Action: 								aGREP -v
+Expected_result:						Show current vesion of aGREP.
+Result as root: 						Passed
+Result as user: 						Passed
+Result from english dir:				Passed
+Result from russian dir: 				Passed
+Result from specsymbols dir: 			Passed
+Comments:								-
+
+Action: 								aGREP -q
+Expected_result:						Error message about the non-existent key
+Result as root: 						Passed
+Result as user: 						Passed
+Result from english dir:				Passed
+Result from russian dir: 				Passed
+Result from specsymbols dir: 			Passed
+Comments:								'-q' doesn't exist.
+
+Action: 								aGREP / file
+Expected_result:						Error message about the need of key
+Result as root: 						Passed
+Result as user: 						Passed
+Result from english dir:				Passed
+Result from russian dir: 				Passed
+Result from specsymbols dir: 			Passed
+Comments:								Need key for pattern.
+
+##----------------------------------Pattern key(-p)-------------------------------------##
+
+Action: 								aGREP / -p file | wc -l
+Expected_result:						0
+Result as root: 						Passed
+Result as user: 						Passed
+Result from english dir:				Passed
+Result from russian dir: 				Passed
+Result from specsymbols dir: 			Passed
+Comments:								Find only in direction '/' files which have 'file' in themselves name or themselves contents. Nothing to find.
+
+Action: 								aGREP ~/Test -p file
+Expected_result:						Find ~/Test/file. Not find ~/Test/FILe.
+Result as root: 						Passed
+Result as user: 						Passed
+Result from english dir:				Passed
+Result from russian dir: 				Passed
+Result from specsymbols dir: 			Passed
+Comments:								-
+
+Action: 								aGREP -f ~/Test -p file
+Expected_result:						Find ~/Test/file. Not find ~/Test/FILe.
+Result as root: 						Passed
+Result as user: 						Passed
+Result from english dir:				Passed
+Result from russian dir: 				Passed
+Result from specsymbols dir: 			Passed
+Comments:								-
+
+##----------------------------------Ignorecase key-------------------------------------##
+
+Action: 								aGREP ~/Test -p file -i
+Expected_result:						Find ~/Test/file, ~/Test/FILe.
+Result as root: 						Passed
+Result as user: 						Passed
+Result from english dir:				Passed
+Result from russian dir: 				Passed
+Result from specsymbols dir: 			Passed
+Comments:								-
+
+Action: 								aGREP ~/Test -ip file
+Expected_result:						Find ~/Test/file, ~/Test/FILe.
+Result as root: 						Passed
+Result as user: 						Passed
+Result from english dir:				Passed
+Result from russian dir: 				Passed
+Result from specsymbols dir: 			Passed
+Comments:								-
+
+Action: 								aGREP ~/Test -pi file
+Expected_result:						Error message.
+Result as root: 						Passed
+Result as user: 						Passed
+Result from english dir:				Passed
+Result from russian dir: 				Passed
+Result from specsymbols dir: 			Passed
+Comments:								'-p' must be separate from other keys or be last into group of keys.
+
+Action: 								aGREP ~/Test -p file --ignorecase
+Expected_result:						Find ~/Test/file, ~/Test/FILe.
+Result as root: 						Passed
+Result as user: 						Passed
+Result from english dir:				Passed
+Result from russian dir: 				Passed
+Result from specsymbols dir: 			Passed
+Comments:								-
+
+Action: 								aGREP ~/Test --ignorecase -p file
+Expected_result:						Find ~/Test/file, ~/Test/FILe.
+Result as root: 						Passed
+Result as user: 						Passed
+Result from english dir:				Passed
+Result from russian dir: 				Passed
+Result from specsymbols dir: 			Passed
+Comments:								-
+
+Action: 								aGREP ~/Test -p --ignorecase file
+Expected_result:						Error message.
+Result as root: 						Passed
+Result as user: 						Passed
+Result from english dir:				Passed
+Result from russian dir: 				Passed
+Result from specsymbols dir: 			Passed
+Comments:								'-p' must be separate from other keys or be last into group of keys.
+
+##----------------------------------Name key-------------------------------------##
+
+Action: 								aGREP ~/Test -p xam
+Expected_result:						Find ~/Test/file, ~/Test/FILe.
+Result as root: 						Passed
+Result as user: 						Passed
+Result from english dir:				Passed
+Result from russian dir: 				Passed
+Result from specsymbols dir: 			Passed
+Comments:								'xam' in 'Example'
+
+Action: 								aGREP ~/Test -np xam
+Expected_result:						Files not found.
+Result as root: 						Passed
+Result as user: 						Passed
+Result from english dir:				Passed
+Result from russian dir: 				Passed
+Result from specsymbols dir: 			Passed
+Comments:								-
+
+Action: 								aGREP ~/Test --name -p xam
+Expected_result:						Files not found.
+Result as root: 						Passed
+Result as user: 						Passed
+Result from english dir:				Passed
+Result from russian dir: 				Passed
+Result from specsymbols dir: 			Passed
+Comments:								-
+
+##----------------------------------Recursive key-------------------------------------##
+
+Action: 								aGREP / -rp xam
+Expected_result:						Find 'xam' substrings in system.
+Result as root: 						Passed
+Result as user: 						Passed
+Result from english dir:				Passed
+Result from russian dir: 				Passed
+Result from specsymbols dir: 			Passed
+Comments:								-
+
+Action: 								aGREP / --recursive -p xam
+Expected_result:						Find 'xam' substrings in system.
+Result as root: 						Passed
+Result as user: 						Passed
+Result from english dir:				Passed
+Result from russian dir: 				Passed
+Result from specsymbols dir: 			Passed
+Comments:								-
+
+Action: 								aGREP / -r -p xam
+Expected_result:						Find 'xam' substrings in system.
+Result as root: 						Passed
+Result as user: 						Passed
+Result from english dir:				Passed
+Result from russian dir: 				Passed
+Result from specsymbols dir: 			Passed
+Comments:								-
+
+
+##----------------------------------Pattern key(--pattern)-------------------------------------##
+
+
+Action: 								aGREP / --pattern file | wc -l
+Expected_result:						0
+Result as root: 						Passed
+Result as user: 						Passed
+Result from english dir:				Passed
+Result from russian dir: 				Passed
+Result from specsymbols dir: 			Passed
+Comments:								Find only in direction '/' files which have 'file' in themselves name or themselves contents. Nothing to find.
+
+Action: 								aGREP ~/Test --pattern file
+Expected_result:						Find ~/Test/file. Not find ~/Test/FILe.
+Result as root: 						Passed
+Result as user: 						Passed
+Result from english dir:				Passed
+Result from russian dir: 				Passed
+Result from specsymbols dir: 			Passed
+Comments:								-
+
+Action: 								aGREP -f ~/Test --pattern file
+Expected_result:						Find ~/Test/file. Not find ~/Test/FILe.
+Result as root: 						Passed
+Result as user: 						Passed
+Result from english dir:				Passed
+Result from russian dir: 				Passed
+Result from specsymbols dir: 			Passed
+Comments:								-
+
+Action: 								aGREP ~/Test --pattern file -i
+Expected_result:						Find ~/Test/file, ~/Test/FILe.
+Result as root: 						Passed
+Result as user: 						Passed
+Result from english dir:				Passed
+Result from russian dir: 				Passed
+Result from specsymbols dir: 			Passed
+Comments:								-
+
+Action: 								aGREP ~/Test -i --pattern file
+Expected_result:						Find ~/Test/file, ~/Test/FILe.
+Result as root: 						Passed
+Result as user: 						Passed
+Result from english dir:				Passed
+Result from russian dir: 				Passed
+Result from specsymbols dir: 			Passed
+Comments:								-
+
+Action: 								aGREP ~/Test --pattern -i file
+Expected_result:						Error message.
+Result as root: 						Passed
+Result as user: 						Passed
+Result from english dir:				Passed
+Result from russian dir: 				Passed
+Result from specsymbols dir: 			Passed
+Comments:								'--pattern' must be separate from other keys or be last into group of keys.
+
+Action: 								aGREP ~/Test --pattern file --ignorecase
+Expected_result:						Find ~/Test/file, ~/Test/FILe.
+Result as root: 						Passed
+Result as user: 						Passed
+Result from english dir:				Passed
+Result from russian dir: 				Passed
+Result from specsymbols dir: 			Passed
+Comments:								-
+
+Action: 								aGREP ~/Test --ignorecase --pattern file
+Expected_result:						Find ~/Test/file, ~/Test/FILe.
+Result as root: 						Passed
+Result as user: 						Passed
+Result from english dir:				Passed
+Result from russian dir: 				Passed
+Result from specsymbols dir: 			Passed
+Comments:								-
+
+Action: 								aGREP ~/Test --pattern --ignorecase file
+Expected_result:						Error message.
+Result as root: 						Passed
+Result as user: 						Passed
+Result from english dir:				Passed
+Result from russian dir: 				Passed
+Result from specsymbols dir: 			Passed
+Comments:								'--pattern' must be separate from other keys or be last into group of keys.
+
+Action: 								aGREP ~/Test --pattern xam
+Expected_result:						Find ~/Test/file, ~/Test/FILe.
+Result as root: 						Passed
+Result as user: 						Passed
+Result from english dir:				Passed
+Result from russian dir: 				Passed
+Result from specsymbols dir: 			Passed
+Comments:								'xam' in 'Example'
+
+Action: 								aGREP ~/Test -n --pattern xam
+Expected_result:						Files not found.
+Result as root: 						Passed
+Result as user: 						Passed
+Result from english dir:				Passed
+Result from russian dir: 				Passed
+Result from specsymbols dir: 			Passed
+Comments:								-
+
+Action: 								aGREP ~/Test --name --pattern xam
+Expected_result:						Files not found.
+Result as root: 						Passed
+Result as user: 						Passed
+Result from english dir:				Passed
+Result from russian dir: 				PassedResult from specsymbols dir: 			Passed
+Comments:								-
+
+Action: 								aGREP / -r --pattern xam
+Expected_result:						Find 'xam' substrings in system.
+Result as root: 						Passed
+Result as user: 						Passed
+Result from english dir:				Passed
+Result from russian dir: 				Passed
+Result from specsymbols dir: 			Passed
+Comments:								-
+
+Action: 								aGREP / --recursive --pattern xam
+Expected_result:						Find 'xam' substrings in system.
+Result as root: 						Passed
+Result as user: 						Passed
+Result from english dir:				Passed
+Result from russian dir: 				Passed
+Result from specsymbols dir: 			Passed
+Comments:								-
+
+Action: 								aGREP / -r --pattern xam
+Expected_result:						Find 'xam' substrings in system.
+Result as root: 						Passed
+Result as user: 						Passed
+Result from english dir:				Passed
+Result from russian dir: 				Passed
+Result from specsymbols dir: 			Passed
+Comments:								-
+
+##----------------------------------Signals-------------------------------------##
+
+Action: 								Press CTRL+C at runtime.
+Expected_result:						Abort program runtime. Send a message about aborting.
+Result as root: 						Passed
+Result as user: 						Passed
+Result from english dir:				Passed
+Result from russian dir: 				Passed
+Result from specsymbols dir: 			Passed
+Comments:								-
+
+
+
